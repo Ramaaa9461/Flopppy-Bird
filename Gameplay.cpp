@@ -38,7 +38,6 @@ Gameplay::~Gameplay()
 	{
 		delete pair[i];
 	}
-
 }
 
 void Gameplay::InGame()
@@ -80,8 +79,6 @@ void Gameplay::Input()
 
 void Gameplay::Update()
 {
-
-
 	for (int i = 0; i < totalPairs; i++)
 	{
 		pair[i]->Movement();
@@ -92,7 +89,7 @@ void Gameplay::Update()
 
 void Gameplay::Draw()
 {
-	DrawPlayer(player);
+	player->Draw();
 
 	for (int i = 0; i < totalPairs; i++)
 	{
@@ -126,8 +123,7 @@ void Gameplay::ResetPlayerData(Player* player)
 
 void Gameplay::InitGameplay()
 {
-	int offsetX = 200;
-	SetPlayerData(player, screenWidth / 2 - offsetX, screenHeight / 2);
+	player->SetData();
 
 	SetInGamePauseData();
 
@@ -158,11 +154,6 @@ void Gameplay::SetPlayerData(Player* player, int posX, int posY)
 void Gameplay::SetPlayerPosition(Player* player, int posX, int posY)
 {
 	player->SetRectanglePos(posX, posY);
-}
-
-void Gameplay::DrawPlayer(Player* player)
-{
-	DrawRectangleRec(player->GetRectangle(), player->GetColor());
 }
 
 

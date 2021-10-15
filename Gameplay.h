@@ -26,7 +26,6 @@ private:
 	void Draw();
 	void SetPlayerData(Player* player, int posX, int posY);
 	void SetPlayerPosition(Player* player, int posX, int posY);
-	void DrawPlayer(Player* player);
 	void DrawPlayerPoints(Player* player, int x, int y);
 	void ResetPlayerData(Player* player);
 	void ResetData(Player* player);

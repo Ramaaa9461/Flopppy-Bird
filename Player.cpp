@@ -3,18 +3,22 @@
 const int screenWidth = 800;
 const int screenHeight = 450;
 
-float timeElapsed = 5;
+float timeElapsed = 0.5f;
 
 Player::Player()
 {
 	rectangle.width = 10;
 	rectangle.height = 30;
+
+	
 	color = BLACK;
 	speed = 300;
 	points = 0;
 	isFalling = true;
 	gravity = 0.0001;
+	velocity = 0;
 	upForce = 800;
+	acceleration = 0;
 
 	isFalling = true;
 }
@@ -80,13 +84,21 @@ void Player::AddPoints(int _points)
 	points += _points;
 }
 
+void Player::SetData()
+{
+	int offsetX = 200;
+
+	rectangle.x = screenWidth / 2 - offsetX;
+	rectangle.y = screenHeight / 2;
+}
+
 void Player::Movement()
 {
 	timeElapsed += GetFrameTime();
 
-	if ((IsKeyDown(KEY_SPACE) && velocity >= gravity / 10))
+	if ((IsKeyDown(KEY_SPACE) && velocity >= gravity))
 	{
-		timeElapsed = 5;
+		timeElapsed = 0.5f;
 		acceleration = 0;
 		velocity = -gravity * upForce;
 	}
@@ -102,4 +114,9 @@ void Player::Movement()
 	{
 		rectangle.y += velocity * timeElapsed;
 	}
+}
+
+void Player::Draw()
+{
+	DrawRectangleRec(GetRectangle(), GetColor());
 }

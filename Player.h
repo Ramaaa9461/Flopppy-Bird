@@ -34,7 +34,11 @@ public:
 	void SetRectanglePos(int posX, int posY);
 	void AddPoints(int _points);
 
+	void SetData();
+
 	void Movement();
+
+	void Draw();
 };
 
 
