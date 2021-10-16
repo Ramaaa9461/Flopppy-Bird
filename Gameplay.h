@@ -30,6 +30,10 @@ private:
 	void ResetPlayerData(Player* player);
 	void ResetData(Player* player);
 
+	void Collision();
+	void ResetNumberCounter();
+	void ResetWallsPositions();
+
 public:
 	Gameplay();
 	~Gameplay();

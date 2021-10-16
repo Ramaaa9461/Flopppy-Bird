@@ -12,6 +12,9 @@ int offset = 60;
 int timeElapsed = 0;
 
 const int totalPairs = 4;
+
+bool alreadyAddedPoint[totalPairs] = { false };
+
 Gameplay::Gameplay()
 {
 	player = new Player();
@@ -85,6 +88,9 @@ void Gameplay::Update()
 	}
 
 	player->Movement();
+
+
+	Collision();
 }
 
 void Gameplay::Draw()
@@ -115,6 +121,64 @@ void Gameplay::ResetData(Player* player)
 	ResetPlayerData(player);
 }
 
+void Gameplay::Collision()
+{
+	for (int i = 0; i < totalPairs; i++)
+	{
+		if (CheckCollisionRecs(player->GetRectangle(), pair[i]->GetWall1Collider()))
+		{
+			player->ResetData();
+			ResetNumberCounter();
+			ResetWallsPositions();
+		}
+		else if (CheckCollisionRecs(player->GetRectangle(), pair[i]->GetWall2Collider()))
+		{
+			player->ResetData();
+			ResetNumberCounter();
+			ResetWallsPositions();
+		}
+		else if (CheckCollisionRecs(player->GetRectangle(), pair[i]->GetBlankCollider()) && !alreadyAddedPoint[i])
+		{
+			player->AddPoints(1);
+			alreadyAddedPoint[i] = true;
+		}
+	}
+
+	for (int i = 0; i < totalPairs; i++)
+	{
+		if (alreadyAddedPoint[i])
+		{
+			if (i == 0)
+			{
+				alreadyAddedPoint[3] = false;
+			}
+			else
+			{
+				alreadyAddedPoint[i - 1] = false;
+			}
+		}
+	}
+	
+}
+
+void Gameplay::ResetNumberCounter()
+{
+	for (int i = 0; i < totalPairs; i++)
+	{
+		alreadyAddedPoint[i] = false;
+	}
+}
+
+void Gameplay::ResetWallsPositions()
+{
+	float offset = 200;
+
+	for (int i = 0; i < totalPairs; i++)
+	{
+		pair[i]->SetPosition(screenWidth + offset * i, GetRandomValue(0, screenHeight - offset));
+	}
+}
+
 void Gameplay::ResetPlayerData(Player* player)
 {
 	player->SetPoints(0);
@@ -123,7 +187,7 @@ void Gameplay::ResetPlayerData(Player* player)
 
 void Gameplay::InitGameplay()
 {
-	player->SetData();
+	player->ResetData();
 
 	SetInGamePauseData();
 

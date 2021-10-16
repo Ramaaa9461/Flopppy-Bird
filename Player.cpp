@@ -84,12 +84,14 @@ void Player::AddPoints(int _points)
 	points += _points;
 }
 
-void Player::SetData()
+void Player::ResetData()
 {
 	int offsetX = 200;
 
 	rectangle.x = screenWidth / 2 - offsetX;
 	rectangle.y = screenHeight / 2;
+
+	points = 0;
 }
 
 void Player::Movement()
