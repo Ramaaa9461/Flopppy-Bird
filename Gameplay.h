@@ -33,6 +33,7 @@ private:
 	void Collision();
 	void ResetNumberCounter();
 	void ResetWallsPositions();
+	void ResetCounterBooleans();
 
 public:
 	Gameplay();

@@ -144,21 +144,7 @@ void Gameplay::Collision()
 		}
 	}
 
-	for (int i = 0; i < totalPairs; i++)
-	{
-		if (alreadyAddedPoint[i])
-		{
-			if (i == 0)
-			{
-				alreadyAddedPoint[3] = false;
-			}
-			else
-			{
-				alreadyAddedPoint[i - 1] = false;
-			}
-		}
-	}
-	
+	ResetCounterBooleans();
 }
 
 void Gameplay::ResetNumberCounter()
@@ -176,6 +162,24 @@ void Gameplay::ResetWallsPositions()
 	for (int i = 0; i < totalPairs; i++)
 	{
 		pair[i]->SetPosition(screenWidth + offset * i, GetRandomValue(0, screenHeight - offset));
+	}
+}
+
+void Gameplay::ResetCounterBooleans()
+{
+	for (int i = 0; i < totalPairs; i++)
+	{
+		if (alreadyAddedPoint[i])
+		{
+			if (i == 0)
+			{
+				alreadyAddedPoint[3] = false;
+			}
+			else
+			{
+				alreadyAddedPoint[i - 1] = false;
+			}
+		}
 	}
 }
 

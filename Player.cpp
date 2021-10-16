@@ -98,7 +98,7 @@ void Player::Movement()
 {
 	timeElapsed += GetFrameTime();
 
-	if ((IsKeyDown(KEY_SPACE) && velocity >= gravity))
+	if ((IsKeyDown(KEY_SPACE)))
 	{
 		timeElapsed = 0.5f;
 		acceleration = 0;
@@ -110,11 +110,15 @@ void Player::Movement()
 	if (acceleration > gravity)
 		acceleration = gravity;
 
-	velocity += acceleration * timeElapsed;
+		velocity += acceleration * timeElapsed;
 
 	if (rectangle.y <= screenHeight - rectangle.height)
 	{
 		rectangle.y += velocity * timeElapsed;
+	}
+	else
+	{
+		rectangle.y = rectangle.y - 1;
 	}
 }
 
