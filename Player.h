@@ -9,6 +9,9 @@ private:
 	int speed;
 	int points;
 
+	Texture2D bird;
+	Texture2D animation[3];
+
 	float gravity;
 	float velocity;
 	float acceleration;
@@ -33,6 +36,8 @@ public:
 	void SetPoints(int _points);
 	void SetRectanglePos(int posX, int posY);
 	void AddPoints(int _points);
+
+	void LoadTextures();
 
 	void ResetData();
 

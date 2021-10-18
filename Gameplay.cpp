@@ -49,9 +49,11 @@ void Gameplay::InGame()
 	if (!pause->GetInPause())
 	{
 		Update();
+		Draw();
 	}
 	else
 	{
+		Draw();
 		pause->InPause();
 		if (scene->GetScene() == Scene::MENU)
 		{
@@ -59,7 +61,6 @@ void Gameplay::InGame()
 		}
 	}
 	audioManager->PlayGameMusic();
-	Draw();
 }
 
 bool Gameplay::GetInPause()
@@ -191,6 +192,8 @@ void Gameplay::ResetPlayerData(Player* player)
 
 void Gameplay::InitGameplay()
 {
+	player->LoadTextures();
+
 	player->ResetData();
 
 	SetInGamePauseData();
