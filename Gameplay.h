@@ -5,6 +5,7 @@
 #include "AudioManager.h"
 #include "EndGameScreen.h"
 #include "PairOfWalls.h"
+#include "Paralax.h"
 
 class Gameplay
 {
@@ -15,10 +16,11 @@ private:
 	SceneManager* scene;
 	InGamePause* pause;
 
+	Paralax* paralax;
+
 	Player* player;
 	HUD* hud;
 	Player* player2;
-	HUD* hud2;
 
 	PairOfWalls* pair[4];
 

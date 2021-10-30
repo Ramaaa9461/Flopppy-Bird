@@ -1,6 +1,5 @@
 #include "Gameplay.h"
-#include <iostream>
-#include <string>
+
 
 const int screenWidth = 800;
 const int screenHeight = 450;
@@ -20,11 +19,11 @@ Gameplay::Gameplay()
 {
 	twoPlayers = true;
 
+	//paralax = new Paralax();
 	player = new Player();
 	player2 = new Player();
 
 	hud = new HUD();
-	hud2 = new HUD();
 
 	pause = new InGamePause();
 
@@ -36,6 +35,8 @@ Gameplay::Gameplay()
 	}
 
 	inPause = false;
+
+	//paralax->loadTexture();
 }
 
 Gameplay::~Gameplay()
@@ -43,8 +44,8 @@ Gameplay::~Gameplay()
 	delete player;
 	delete player2;
 	delete hud;
-	delete hud2;
 	delete pause;
+	//delete paralax;
 
 	for (int i = 0; i < totalPairs; i++)
 	{
@@ -96,15 +97,17 @@ void Gameplay::Input()
 
 void Gameplay::Update()
 {
+	//paralax->update();
+
 	for (int i = 0; i < totalPairs; i++)
 	{
 		pair[i]->Movement();
 	}
 
-	player->Movement(KEY_A);
+	player->Movement(KEY_SPACE);
 	if (twoPlayers)
 	{
-		player2->Movement(KEY_L);
+		player2->Movement(KEY_UP);
 	}
 
 	Collision();
@@ -112,10 +115,12 @@ void Gameplay::Update()
 
 void Gameplay::Draw()
 {
-	player->Draw();
+	//paralax->draw();
+	player->Draw(false);
+
 	if (twoPlayers)
 	{
-		player2->Draw();
+		player2->Draw(true);
 	}
 
 	for (int i = 0; i < totalPairs; i++)
@@ -123,7 +128,10 @@ void Gameplay::Draw()
 		pair[i]->Draw();
 	}
 
-	DrawPlayerPoints(player, 300, 50);
+	if (!twoPlayers)
+	{
+	DrawPlayerPoints(player, 200, 30);
+	}
 }
 
 void Gameplay::SetSceneManager(SceneManager* sc)
@@ -134,13 +142,7 @@ void Gameplay::SetSceneManager(SceneManager* sc)
 void Gameplay::DrawPlayerPoints(Player* player, int x, int y)
 {
 	hud->DrawPoints(player->GetPoints(), x, y, fontSize, BLACK);
-
-	if (twoPlayers)
-	{
-		hud2->DrawPoints(player2->GetPoints(), x, y + 50, fontSize, BLACK);
-	}
 }
-
 
 void Gameplay::ResetData(Player* player)
 {
@@ -284,12 +286,11 @@ void Gameplay::SetAudioManager(AudioManager* am)
 
 void Gameplay::SetPlayerData(Player* player, int posX, int posY)
 {
-	SetPlayerPosition(player, posX + 10, posY);
+	SetPlayerPosition(player, posX, posY);
 
 	if (twoPlayers)
 	{
-		SetPlayerPosition(player2, posX - 10 , posY);
-
+		SetPlayerPosition(player2, posX , posY);
 	}
 }
 
@@ -305,6 +306,5 @@ bool Gameplay::GetTwoPlayers()
 
 void Gameplay::SetTwoPlayers(bool twoPlayers)
 {
-
 	this->twoPlayers = twoPlayers;
 }

@@ -20,6 +20,7 @@ private:
 	bool isFalling;
 
 public:
+
 	Player();
 	~Player();
 
@@ -43,8 +44,7 @@ public:
 
 	void Movement(int key);
 
-
-	void Draw();
+	void Draw(bool twoPlayers);
 };
 
 

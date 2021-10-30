@@ -64,9 +64,6 @@
     <Filter Include="Screens\Gameplay\Walls">
       <UniqueIdentifier>{9cb726c2-5102-4913-9c0b-a91c1d4576ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Screens\ChooseMode">
-      <UniqueIdentifier>{e9f6c248-bb12-4579-9eb8-e578d5903cc2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Screens\Gameplay\Paralax">
       <UniqueIdentifier>{34b9b0e2-b8ad-42ec-9056-beb91c85f017}</UniqueIdentifier>
     </Filter>
@@ -123,9 +120,6 @@
     <ClCompile Include="Gameplay.cpp">
       <Filter>Screens\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="ChooseMode.cpp">
-      <Filter>Screens\ChooseMode</Filter>
-    </ClCompile>
     <ClCompile Include="Paralax.cpp">
       <Filter>Screens\Gameplay\Paralax</Filter>
     </ClCompile>
@@ -178,9 +172,6 @@
     </ClInclude>
     <ClInclude Include="Gameplay.h">
       <Filter>Screens\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="ChooseMode.h">
-      <Filter>Screens\ChooseMode</Filter>
     </ClInclude>
     <ClInclude Include="Paralax.h">
       <Filter>Screens\Gameplay\Paralax</Filter>

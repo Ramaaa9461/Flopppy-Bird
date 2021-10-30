@@ -165,7 +165,6 @@ XCOPY "$(SolutionDir)res\assets" "$(ProjectDir)res\assets" /e /h /y /s</Command>
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BlankSpace.cpp" />
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="ChooseMode.cpp" />
     <ClCompile Include="Credits.cpp" />
     <ClCompile Include="EndGameScreen.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -186,7 +185,6 @@ XCOPY "$(SolutionDir)res\assets" "$(ProjectDir)res\assets" /e /h /y /s</Command>
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BlankSpace.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="ChooseMode.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="EndGameScreen.h" />
     <ClInclude Include="GameManager.h" />

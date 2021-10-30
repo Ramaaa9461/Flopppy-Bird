@@ -11,10 +11,11 @@ void Credits::DrawCredits()
 {
 	Font font = GetFontDefault();
 	DrawText("Credits:", 10, 10, 40, BLACK);
-	DrawText("Creator: Pablo Goldman", 10, 60, 40, BLACK);
-	DrawText("Sprint 3 Create by: Ramiro Guzman", 10, 110, 40, BLACK);
-	DrawText("Logo designer: Fermin Gimpel", 10, 160, 40, BLACK);
-	DrawText("Music By: Lautaro Bianco", 10, 210, 40, BLACK);
+	DrawText("Created by pablo Goldman", 10, 60, 40, BLACK);
+	DrawText("continued by Ramiro Guzman", 10, 110, 40, BLACK);
+
+	DrawText("created with Raylib library", 10, 160, 40, BLACK);
+	DrawText("It was programmed in the IDE Visual Studio 2019", 10, 210, 30, BLACK);
 	DrawText("Library Creator: Raysan", 10, 260, 40, BLACK);
 
 

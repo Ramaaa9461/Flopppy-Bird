@@ -16,7 +16,7 @@ Player::Player()
 	rectangle.width = 10;
 	rectangle.height = 30;
 
-	
+
 	color = BLACK;
 	speed = 300;
 	points = 0;
@@ -96,6 +96,7 @@ void Player::LoadTextures()
 	animation[0] = LoadTexture("res/assets/AguilaPose1.png");
 	animation[1] = LoadTexture("res/assets/AguilaPose2.png");
 	animation[2] = LoadTexture("res/assets/AguilaPose3.png");
+
 }
 
 void Player::ResetData()
@@ -143,9 +144,11 @@ void Player::Movement(int key)
 		rectangle.y = rectangle.y - 1;
 		timeElapsed = 0.5f;
 	}
+//======================================================================
+
 }
 
-void Player::Draw()
+void Player::Draw(bool twoPlayers)
 {
 	float offsetX = 70;
 	float offsetY = 40;
@@ -170,7 +173,17 @@ void Player::Draw()
 		actualAnimation = 0;
 		timeElapsedForAnim = 0;
 	}
-
-	DrawTexture(bird, rectangle.x - offsetX, rectangle.y - offsetY, WHITE);
+	if (!twoPlayers)
+	{
+		DrawText("P1", rectangle.x, rectangle.y - 10, 20, BLACK);
+		DrawTexture(bird, rectangle.x - offsetX, rectangle.y - offsetY, WHITE);
+	}
+	else
+	{
+		DrawText("P2", rectangle.x - offsetX, rectangle.y, 20 ,BLACK);
+		DrawTexture(bird, rectangle.x - offsetX, rectangle.y - offsetY, SKYBLUE);
+	}
 	//DrawRectangleRec(GetRectangle(), GetColor());
+//=========================================================================
+
 }
