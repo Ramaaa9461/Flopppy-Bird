@@ -1,5 +1,8 @@
-	#pragma once
+#pragma once
+
 #include "raylib.h"
+
+#include "Paralax.h"
 
 class Player
 {
@@ -15,9 +18,11 @@ private:
 	float gravity;
 	float velocity;
 	float acceleration;
-	float upForce;
 
+	bool isAlive;
 	bool isFalling;
+	//=====================================================
+	Paralax* parallax;
 
 public:
 
@@ -45,6 +50,12 @@ public:
 	void Movement(int key);
 
 	void Draw(bool twoPlayers);
+
+	void SetIsAlive(bool isAlive);
+	bool GetIsAlive();
+
+	//========================================================
+	Paralax* GetParalax();
 };
 
 

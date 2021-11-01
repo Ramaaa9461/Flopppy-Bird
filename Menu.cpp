@@ -10,11 +10,11 @@ int rectangleHeight = 250;
 
 int txtSize = 50;
 
-int PlayButton1Position = 50;
-int PlayButton2Position = 100;
-int OptionsButtonPosition = 150;
-int CreditsButtonPosition = 200;
-int ExitButtonPosition = 250;
+int PlayButton1Position = 150;
+int PlayButton2Position = 200;
+int OptionsButtonPosition = 250;
+int CreditsButtonPosition = 300;
+int ExitButtonPosition = 350;
 
 
 int releaseButtonOffSet = 50;
@@ -65,18 +65,29 @@ void Menu::Input()
 
 void Menu::Update()
 {
-	audioManager->PlayMenuMusic();
 	Menu::SetMenuOption();
 }
 
 void Menu::Draw()
 {
+	DrawText("Flappy Birds", GetScreenWidth() / 2 - 250 , 10,80, YELLOW);
+	
+	DrawRectangle(295, PlayButton1Position, 245, 45, DARKBLUE);
 	DrawButton(_button[0], "1 PLAYER");
+	
+	DrawRectangle(295, PlayButton2Position, 260, 45, DARKBLUE);
 	DrawButton(_button[1], "2 PLAYER");
+
+	DrawRectangle(295, OptionsButtonPosition, 285, 45, DARKBLUE);
 	DrawButton(_button[2], "CONTROLS");
+
+	DrawRectangle(295, CreditsButtonPosition, 240, 45, DARKBLUE);
 	DrawButton(_button[3], "CREDITS");
+
+	DrawRectangle(295, ExitButtonPosition, 135, 45, DARKBLUE);
 	DrawButton(_button[4], "EXIT");
-	DrawButton(releaseVersion, "version 0.3");
+
+	DrawButton(releaseVersion, "version 1.0");
 
 	DrawLogo();
 }
@@ -96,7 +107,8 @@ void Menu::InitMenuData()
 
 void Menu::DrawLogo()
 {
-	DrawTextureEx(logo, { screenWidth - 200,screenHeight - 170 }, 0, 0.4, WHITE);
+	DrawTexture(logo, 0, GetScreenHeight() - logo.height, WHITE);
+	//DrawTextureEx(logo, { screenWidth - 200,screenHeight - 170 }, 0, 0.4, WHITE);
 }
 
 void Menu::SetButtonsData(Button _button[], int posX, int posY, int height, int width)
@@ -106,12 +118,14 @@ void Menu::SetButtonsData(Button _button[], int posX, int posY, int height, int 
 	_button->SetHeight(height);
 	_button->SetWidth(width);
 
-	_button->SetColor(BLACK);
+	_button->SetColor(YELLOW);
 }
 
 void Menu::LoadTextures()
 {
-	logo = LoadTexture("res/Images/assets/Cachuflito.png");
+	logo = LoadTexture("res/assets/Cachuflito.png");
+	logo.width *= 0.1;
+	logo.height *= 0.1;
 }
 
 void Menu::UnloadTextures()

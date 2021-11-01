@@ -90,7 +90,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -123,11 +123,8 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PreBuildEvent>
-      <Command>MKDIR "$(TargetDir)res/assets"
-XCOPY "$(SolutionDir)res/assets" "$(TargetDir)res/assets" /e /h /y /s
-XCOPY "$(SolutionDir)Raylibdll" "$(TargetDir)" /e /h /y /s
-MKDIR "$(ProjectDir)res\assets"
-XCOPY "$(SolutionDir)res\assets" "$(ProjectDir)res\assets" /e /h /y /s</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

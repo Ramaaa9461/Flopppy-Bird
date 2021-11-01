@@ -1,5 +1,7 @@
 #include "Player.h"
 
+
+
 const int screenWidth = 800;
 const int screenHeight = 450;
 
@@ -21,18 +23,21 @@ Player::Player()
 	speed = 300;
 	points = 0;
 	isFalling = true;
-	gravity = 0.0001;
-	velocity = 0;
-	upForce = 800;
-	acceleration = 0;
+
+	gravity = 10.0f;
+	velocity = 0.0f;
+	acceleration = 0.0f;
 
 	isFalling = true;
+	isAlive = true;
 
+	//===========================================================
+	parallax = new Paralax();
 }
 
 Player::~Player()
 {
-
+	delete parallax;
 }
 
 Rectangle Player::GetRectangle()
@@ -97,6 +102,7 @@ void Player::LoadTextures()
 	animation[1] = LoadTexture("res/assets/AguilaPose2.png");
 	animation[2] = LoadTexture("res/assets/AguilaPose3.png");
 
+	parallax->LoadTextures();
 }
 
 void Player::ResetData()
@@ -115,38 +121,69 @@ void Player::ResetData()
 
 void Player::Movement(int key)
 {
-	timeElapsed += GetFrameTime();
+	//FORMA ANTIGUA DE CALCULAR EL SALTO
 
-	if ((IsKeyDown(key)))
+	//timeElapsed += GetFrameTime(); 
+
+	//if ((IsKeyDown(key)))
+	//{
+	//	timeElapsed = 0.5f;
+	//	acceleration = 0;
+	//	velocity = (-gravity * upForce) * GetFrameTime();
+	//}
+	//else
+	//{
+	//	acceleration += (gravity * timeElapsed) * GetFrameTime();
+	//}
+
+	//if (acceleration > gravity)
+	//{
+	//	acceleration = gravity;
+	//}
+
+	//velocity += acceleration * timeElapsed;
+
+	//if (rectangle.y <= screenHeight - rectangle.height)
+	//{
+	//	rectangle.y += velocity * timeElapsed;
+	//}
+	//else
+	//{
+	//	//Evita que no se pueda saltar en el piso de la pantalla
+	//	rectangle.y = rectangle.y - 1;
+	//	timeElapsed = 0.5f;
+	//}
+	 
+	//======================================================================
+
+	//FORMA NUEVA DE CALCULAR EL SALTO :D (independiente del FrameTime)
+
+	if (IsKeyPressed(key)) 
 	{
-		timeElapsed = 0.5f;
 		acceleration = 0;
-		velocity = -gravity * upForce;
+		velocity = -gravity / 4;
 	}
-	else
-	{
-		acceleration += gravity * timeElapsed;
-	}
-	if (acceleration > gravity)
+
+	acceleration -= (gravity * GetFrameTime());
+
+	if (acceleration >= gravity)
 	{
 		acceleration = gravity;
 	}
+	velocity -= (acceleration * GetFrameTime());
 
-	velocity += acceleration * timeElapsed;
+	rectangle.y += velocity;
 
-	if (rectangle.y <= screenHeight - rectangle.height)
+	if (rectangle.y > GetScreenHeight() - rectangle.height)
 	{
-		rectangle.y += velocity * timeElapsed;
+		rectangle.y = GetScreenHeight() - rectangle.height;
 	}
-	else
+	if (rectangle.y < 0)
 	{
-		//Evita que no se pueda saltar en el piso de la pantalla
-		rectangle.y = rectangle.y - 1;
-		timeElapsed = 0.5f;
+		rectangle.y = 0;
 	}
-//======================================================================
-
 }
+
 
 void Player::Draw(bool twoPlayers)
 {
@@ -180,10 +217,23 @@ void Player::Draw(bool twoPlayers)
 	}
 	else
 	{
-		DrawText("P2", rectangle.x - offsetX, rectangle.y, 20 ,BLACK);
+		DrawText("P2", rectangle.x - offsetX, rectangle.y, 20, BLACK);
 		DrawTexture(bird, rectangle.x - offsetX, rectangle.y - offsetY, SKYBLUE);
 	}
 	//DrawRectangleRec(GetRectangle(), GetColor());
 //=========================================================================
 
+}
+Paralax* Player::GetParalax()
+{
+	return parallax;
+}
+
+void Player::SetIsAlive(bool isAlive)
+{
+	this->isAlive = isAlive;
+}
+bool Player::GetIsAlive()
+{
+	return isAlive;
 }

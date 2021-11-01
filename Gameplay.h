@@ -35,6 +35,7 @@ private:
 	void DrawPlayerPoints(Player* player, int x, int y);
 	void ResetPlayerData(Player* player);
 	void ResetData(Player* player);
+	void Winner();
 
 	void Collision();
 	void ResetNumberCounter();

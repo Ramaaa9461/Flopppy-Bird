@@ -17,7 +17,7 @@ Paralax::~Paralax()
 	UnloadTexture(back);
 }
 
-void Paralax::loadTexture()
+void Paralax::LoadTextures()
 {
 	 front = LoadTexture("parallax/front.png");
 
@@ -25,7 +25,7 @@ void Paralax::loadTexture()
 
 	 back = LoadTexture("parallax/back.png");
 
-	float scale = 0.6f;
+	float scale = 1.6f;
 	back.height *= scale;
 	back.width *= scale;
 
@@ -36,7 +36,7 @@ void Paralax::loadTexture()
 	front.width *= scale;
 }
 
-void Paralax::update()
+void Paralax::Update()
 {
 	scrollingBack -= 200.0f * GetFrameTime();
 	scrollingMid -= 350.0f * GetFrameTime();
@@ -56,7 +56,7 @@ void Paralax::update()
 	}
 }
 
-void Paralax::draw()
+void Paralax::Draw()
 {
 
 	DrawTextureEx(back, { scrollingBack, 0 }, 0.0f, 2.0f, WHITE);
@@ -65,7 +65,11 @@ void Paralax::draw()
 	DrawTextureEx(middle, { scrollingMid, 0 }, 0.0f, 2.0f, WHITE);
 	DrawTextureEx(middle, { middle.width * 2 + scrollingMid, 0 }, 0.0f, 2.0f, WHITE);
 
-	DrawTextureEx(front, { scrollingFore, 0 }, 0.0f, 2.0f, WHITE);
-	DrawTextureEx(front, { front.width * 2 + scrollingFore, 0 }, 0.0f, 2.0f, WHITE);
+	DrawTextureEx(front, { scrollingFore, 115 }, 0.0f, 2.0f, WHITE);
+	DrawTextureEx(front, { front.width * 2 + scrollingFore, 115 }, 0.0f, 2.0f, WHITE);
 
 }
+
+
+
+//Musica : https://opengameart.org/content/chiptune-exploration

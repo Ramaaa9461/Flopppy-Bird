@@ -38,7 +38,7 @@ Rectangle PairOfWalls::GetBlankCollider()
 
 void PairOfWalls::SetWallsPositions()
 {
-	float offset = 20;
+	float offset = 30;
 	wall1->SetRectanglePos(posX, posY - blankSpace->GetRectangle().height - offset);
 	wall2->SetRectanglePos(posX, posY + blankSpace->GetRectangle().height + offset);
 	blankSpace->SetRectanglePos(posX, posY);

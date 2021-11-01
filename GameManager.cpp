@@ -40,12 +40,13 @@ GameManager::~GameManager()
 
 void GameManager::RunGame()
 {
-	InitWindow(screenWidth, screenHeight, "Flappy bird goldman");
+	InitWindow(screenWidth, screenHeight, "Flappy bird");
+	SetTargetFPS(60);
 
-	while (!WindowShouldClose() && isPlaying)    // Detect window close button or ESC key
+	while (!WindowShouldClose() && isPlaying) 
 	{
 		BeginDrawing();
-		ClearBackground(BLUE);
+		ClearBackground(BLACK);
 
 		PlayMusicInMenu();
 

@@ -18,7 +18,8 @@ public:
 	AudioManager();
 	~AudioManager();
 
-	void InitMusic(Music music);
+	void InitMenuMusic(Music music);
+	void InitGameMusic(Music music);
 
 	Music GetMenuMusic();
 	void StopAllMusics();

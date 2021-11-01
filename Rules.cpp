@@ -11,14 +11,14 @@ void Rules::InRules()
 
 void Rules::DrawRules()
 {
-	Font font = GetFontDefault();
-	DrawText("Player 1 jumps with the \"Space\" key", 10, 10, fontSize, BLACK);
-	DrawText("Player 2 jumps with the \"Up Arrow\"", 10, 60, fontSize, BLACK);
-	DrawText("with the \"p\" key you can pause", 10, 110, fontSize, BLACK);
-	DrawText("with the \"esc\" key and exit the game", 10, 160, fontSize, BLACK);
-	/*DrawText("Take care if both players reach 7 points!", 10, 210, fontSize, BLACK);
-	DrawText("Press |P| to pause the game while playing", 10, 260, fontSize, BLACK);*/
-	DrawText("Press enter to continue...", 10, 400, fontSize, BLACK);
+	DrawText("Controls", GetScreenWidth() / 2 - 250, 10, 80, YELLOW);
+
+	DrawText("Player 1 jumps with the \"Space\" key", 10, 150, fontSize, YELLOW);
+	DrawText("Player 2 jumps with the \"Up Arrow\"", 10, 200, fontSize, YELLOW);
+	DrawText("with the \"p\" key you can pause", 10, 250, fontSize, YELLOW);
+	DrawText("with the \"esc\" key and exit the game", 10, 300, fontSize, YELLOW);
+
+	DrawText("Press enter to continue...", 10, 400, fontSize, YELLOW);
 }
 
 void Rules::SetSceneManager(SceneManager* sm)

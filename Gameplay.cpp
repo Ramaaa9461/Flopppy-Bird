@@ -1,5 +1,6 @@
 #include "Gameplay.h"
 
+#include <iostream>
 
 const int screenWidth = 800;
 const int screenHeight = 450;
@@ -18,8 +19,7 @@ bool alreadyAddedPoint[totalPairs] = { false };
 Gameplay::Gameplay()
 {
 	twoPlayers = true;
-
-	//paralax = new Paralax();
+	
 	player = new Player();
 	player2 = new Player();
 
@@ -36,7 +36,6 @@ Gameplay::Gameplay()
 
 	inPause = false;
 
-	//paralax->loadTexture();
 }
 
 Gameplay::~Gameplay()
@@ -45,7 +44,6 @@ Gameplay::~Gameplay()
 	delete player2;
 	delete hud;
 	delete pause;
-	//delete paralax;
 
 	for (int i = 0; i < totalPairs; i++)
 	{
@@ -74,6 +72,7 @@ void Gameplay::InGame()
 			}
 		}
 	}
+
 	audioManager->PlayGameMusic();
 }
 
@@ -97,7 +96,7 @@ void Gameplay::Input()
 
 void Gameplay::Update()
 {
-	//paralax->update();
+	player->GetParalax()->Update();
 
 	for (int i = 0; i < totalPairs; i++)
 	{
@@ -105,17 +104,26 @@ void Gameplay::Update()
 	}
 
 	player->Movement(KEY_SPACE);
+
 	if (twoPlayers)
 	{
 		player2->Movement(KEY_UP);
 	}
 
 	Collision();
+	
+	if (twoPlayers)
+	{
+		if (!player->GetIsAlive() || !player2->GetIsAlive())
+		{
+			Winner();
+		}
+	}
 }
 
 void Gameplay::Draw()
 {
-	//paralax->draw();
+	player->GetParalax()->Draw();
 	player->Draw(false);
 
 	if (twoPlayers)
@@ -141,7 +149,7 @@ void Gameplay::SetSceneManager(SceneManager* sc)
 
 void Gameplay::DrawPlayerPoints(Player* player, int x, int y)
 {
-	hud->DrawPoints(player->GetPoints(), x, y, fontSize, BLACK);
+	hud->DrawPoints(player->GetPoints(), x, y, fontSize, YELLOW);
 }
 
 void Gameplay::ResetData(Player* player)
@@ -155,6 +163,9 @@ void Gameplay::ResetData(Player* player)
 
 void Gameplay::Collision()
 {
+	float time = 0;
+	float maxTime = 3;
+
 	for (int i = 0; i < totalPairs; i++)
 	{
 		if (CheckCollisionRecs(player->GetRectangle(), pair[i]->GetWall1Collider()))
@@ -162,12 +173,15 @@ void Gameplay::Collision()
 			player->ResetData();
 			ResetNumberCounter();
 			ResetWallsPositions();
+			player->SetIsAlive(false);
+			
 		}
 		else if (CheckCollisionRecs(player->GetRectangle(), pair[i]->GetWall2Collider()))
 		{
 			player->ResetData();
 			ResetNumberCounter();
 			ResetWallsPositions();
+			player->SetIsAlive(false);
 		}
 		else if (CheckCollisionRecs(player->GetRectangle(), pair[i]->GetBlankCollider()) && !alreadyAddedPoint[i])
 		{
@@ -176,7 +190,6 @@ void Gameplay::Collision()
 		}
 	}
 
-	ResetCounterBooleans();
 	if (twoPlayers)
 	{
 		for (int i = 0; i < totalPairs; i++)
@@ -186,12 +199,14 @@ void Gameplay::Collision()
 				player2->ResetData();
 				ResetNumberCounter();
 				ResetWallsPositions();
+				player2->SetIsAlive(false);
 			}
 			else if (CheckCollisionRecs(player2->GetRectangle(), pair[i]->GetWall2Collider()))
 			{
 				player2->ResetData();
 				ResetNumberCounter();
 				ResetWallsPositions();
+				player2->SetIsAlive(false);
 			}
 			else if (CheckCollisionRecs(player2->GetRectangle(), pair[i]->GetBlankCollider()) && !alreadyAddedPoint[i])
 			{
@@ -199,10 +214,12 @@ void Gameplay::Collision()
 				alreadyAddedPoint[i] = true;
 			}
 		}
-		ResetCounterBooleans();
 
 	}
+		ResetCounterBooleans();
 }
+
+
 
 void Gameplay::ResetNumberCounter()
 {
@@ -237,6 +254,27 @@ void Gameplay::ResetCounterBooleans()
 				alreadyAddedPoint[i - 1] = false;
 			}
 		}
+	}
+}
+
+void Gameplay::Winner()
+{
+	if (!player->GetIsAlive() && !player2->GetIsAlive())
+	{
+
+		std::cout << "Empato" << std::endl;
+		player->SetIsAlive(true);
+		player2->SetIsAlive(true);
+	}
+	else if(!player->GetIsAlive())
+	{
+		std::cout << "GANO player 2" << std::endl;
+		player->SetIsAlive(true);
+	}
+	else if (!player2->GetIsAlive())
+	{
+		std::cout << "GANO player 1" << std::endl;
+		player2->SetIsAlive(true);
 	}
 }
 

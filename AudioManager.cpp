@@ -14,9 +14,21 @@ AudioManager::~AudioManager()
 
 }
 
-void AudioManager::InitMusic(Music music)
+void AudioManager::InitMenuMusic(Music music)
 {
-
+	if (!menuMusicInited)
+	{
+		menuMusic = music;
+		menuMusicInited = true;
+	}
+}
+void AudioManager::InitGameMusic(Music music)
+{
+	if (!gameMusicInited)
+	{
+		gameMusic = music;
+		gameMusicInited = true;
+	}
 }
 
 Music AudioManager::GetMenuMusic()
@@ -26,20 +38,31 @@ Music AudioManager::GetMenuMusic()
 
 void AudioManager::StopAllMusics()
 {
+	StopMusicStream(gameMusic);
+	StopMusicStream(menuMusic);
 
 }
 
 void AudioManager::PlayMenuMusic()
 {
-
+	//if (menuMusicInited)
+	//{
+	//	PlayMusicStream(menuMusic);
+	//	StopMusicStream(gameMusic);
+	//	SetMusicVolume(menuMusic, standardVolume);
+	//	UpdateMusicStream(menuMusic);
+	//}
 }
 
 void AudioManager::PlayGameMusic()
 {
-	/*PlayMusicStream(gameMusic);
-	StopMusicStream(menuMusic);
-	SetMusicVolume(gameMusic, standardVolume);
-	UpdateMusicStream(gameMusic);*/
+	//if (gameMusicInited)
+	//{
+	//	PlayMusicStream(gameMusic);
+	//	StopMusicStream(menuMusic);
+	//	SetMusicVolume(gameMusic, standardVolume);
+	//	UpdateMusicStream(gameMusic);
+	//}
 }
 
 void AudioManager::PlayOptionSound()

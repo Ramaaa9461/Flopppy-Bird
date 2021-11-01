@@ -18,8 +18,8 @@ public:
 
 	Paralax();
 	~Paralax();
-	void loadTexture();
-	void update();
-	 void draw();
+	void LoadTextures();
+	void Update();
+	void Draw();
 };
 
