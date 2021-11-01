@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 
+
 class AudioManager
 {
 private:
@@ -18,8 +19,7 @@ public:
 	AudioManager();
 	~AudioManager();
 
-	void InitMenuMusic(Music music);
-	void InitGameMusic(Music music);
+	void InitMusic();
 
 	Music GetMenuMusic();
 	void StopAllMusics();
@@ -28,6 +28,7 @@ public:
 	void PlayOptionSound();
 
 };
+
 
 
 

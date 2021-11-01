@@ -171,6 +171,7 @@ void Gameplay::Collision()
 		if (CheckCollisionRecs(player->GetRectangle(), pair[i]->GetWall1Collider()))
 		{
 			player->ResetData();
+			endGameScreen->ResetWinners();
 			ResetNumberCounter();
 			ResetWallsPositions();
 			player->SetIsAlive(false);
@@ -179,6 +180,7 @@ void Gameplay::Collision()
 		else if (CheckCollisionRecs(player->GetRectangle(), pair[i]->GetWall2Collider()))
 		{
 			player->ResetData();
+			endGameScreen->ResetWinners();
 			ResetNumberCounter();
 			ResetWallsPositions();
 			player->SetIsAlive(false);
@@ -197,6 +199,7 @@ void Gameplay::Collision()
 			if (CheckCollisionRecs(player2->GetRectangle(), pair[i]->GetWall1Collider()))
 			{
 				player2->ResetData();
+				endGameScreen->ResetWinners();
 				ResetNumberCounter();
 				ResetWallsPositions();
 				player2->SetIsAlive(false);
@@ -204,6 +207,7 @@ void Gameplay::Collision()
 			else if (CheckCollisionRecs(player2->GetRectangle(), pair[i]->GetWall2Collider()))
 			{
 				player2->ResetData();
+				endGameScreen->ResetWinners();
 				ResetNumberCounter();
 				ResetWallsPositions();
 				player2->SetIsAlive(false);
@@ -218,8 +222,6 @@ void Gameplay::Collision()
 	}
 		ResetCounterBooleans();
 }
-
-
 
 void Gameplay::ResetNumberCounter()
 {
@@ -261,33 +263,29 @@ void Gameplay::Winner()
 {
 	if (!player->GetIsAlive() && !player2->GetIsAlive())
 	{
-
-		std::cout << "Empato" << std::endl;
 		player->SetIsAlive(true);
 		player2->SetIsAlive(true);
+		endGameScreen->SetTie(true);
+
 	}
 	else if(!player->GetIsAlive())
 	{
-		std::cout << "GANO player 2" << std::endl;
 		player->SetIsAlive(true);
+		endGameScreen->SetWinPlayer2(true);
 	}
 	else if (!player2->GetIsAlive())
 	{
-		std::cout << "GANO player 1" << std::endl;
 		player2->SetIsAlive(true);
+		endGameScreen->SetWinPlayer1(true);
 	}
+
+	scene->SetSceneManager(Scene::ENDGAME);
 }
 
 void Gameplay::ResetPlayerData(Player* player)
 {
 	player->SetPoints(0);
 	player->SetHeight(30);
-
-	if (twoPlayers)
-	{
-		player2->SetPoints(0);
-		player2->SetHeight(30);
-	}
 }
 
 void Gameplay::InitGameplay()

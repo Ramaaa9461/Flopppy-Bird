@@ -1,10 +1,10 @@
 #include "AudioManager.h"
-
-const float standardVolume = 0.3f;
+const float standardVolume = 0.4f;
 
 AudioManager::AudioManager()
 {
 	InitAudioDevice();
+	InitMusic();
 
 	musicInited = false;
 }
@@ -14,21 +14,11 @@ AudioManager::~AudioManager()
 
 }
 
-void AudioManager::InitMenuMusic(Music music)
+void AudioManager::InitMusic()
 {
-	if (!menuMusicInited)
-	{
-		menuMusic = music;
-		menuMusicInited = true;
-	}
-}
-void AudioManager::InitGameMusic(Music music)
-{
-	if (!gameMusicInited)
-	{
-		gameMusic = music;
-		gameMusicInited = true;
-	}
+	menuMusic = LoadMusicStream("res/assets/Music/awesomeness.wav");
+	gameMusic = LoadMusicStream("res/assets/Music/exploration.wav");
+	optionSound = LoadSound("res/assets/Music/sound.ogg");
 }
 
 Music AudioManager::GetMenuMusic()
@@ -38,36 +28,28 @@ Music AudioManager::GetMenuMusic()
 
 void AudioManager::StopAllMusics()
 {
-	StopMusicStream(gameMusic);
 	StopMusicStream(menuMusic);
-
+	StopMusicStream(gameMusic);
 }
 
 void AudioManager::PlayMenuMusic()
 {
-	//if (menuMusicInited)
-	//{
-	//	PlayMusicStream(menuMusic);
-	//	StopMusicStream(gameMusic);
-	//	SetMusicVolume(menuMusic, standardVolume);
-	//	UpdateMusicStream(menuMusic);
-	//}
+	StopMusicStream(gameMusic);
+	PlayMusicStream(menuMusic);
+	SetMusicVolume(menuMusic, standardVolume);
+	UpdateMusicStream(menuMusic);
 }
 
 void AudioManager::PlayGameMusic()
 {
-	//if (gameMusicInited)
-	//{
-	//	PlayMusicStream(gameMusic);
-	//	StopMusicStream(menuMusic);
-	//	SetMusicVolume(gameMusic, standardVolume);
-	//	UpdateMusicStream(gameMusic);
-	//}
+	PlayMusicStream(gameMusic);
+	StopMusicStream(menuMusic);
+	SetMusicVolume(gameMusic, standardVolume);
+	UpdateMusicStream(gameMusic);
 }
 
 void AudioManager::PlayOptionSound()
 {
-
+	SetSoundVolume(optionSound, standardVolume + 0.4f);
+	PlaySound(optionSound);
 }
-
-

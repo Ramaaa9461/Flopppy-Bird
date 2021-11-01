@@ -65,6 +65,7 @@ void Menu::Input()
 
 void Menu::Update()
 {
+	audioManager->PlayMenuMusic();
 	Menu::SetMenuOption();
 }
 
@@ -223,23 +224,27 @@ void Menu::SetMenuOption()
 	switch (menuScene)
 	{
 	case MenuScene::PLAY:
+
 		_button[(int)MenuScene::PLAY]->SetActive(true);
 		break;
 	case MenuScene::PLAY_2J:
+
 		_button[(int)MenuScene::PLAY_2J]->SetActive(true);
 		break;
 	case MenuScene::OPTIONS:
+
 		_button[(int)MenuScene::OPTIONS]->SetActive(true);
 		break;
 	case MenuScene::CREDITS:
+
 		_button[(int)MenuScene::CREDITS]->SetActive(true);
 		break;
 	case MenuScene::EXIT:
+
 		_button[(int)MenuScene::EXIT]->SetActive(true);
 		break;
-	default:
-		break;
 	}
+
 	SetButtonsToFalse();
 }
 

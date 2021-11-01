@@ -27,8 +27,15 @@ public:
 	ENDGAMEOPTION GetOption();
 
 	bool player1Win;
+	bool player2Win;
+	bool tie;
 
-	void SetWinPlayer(bool player1);
+	void SetWinPlayer1(bool player1Win);
+	void SetWinPlayer2(bool player2Win);
+	void SetTie(bool tie);
+
+	void ResetWinners();
+
 	void SetOption(ENDGAMEOPTION _option);
 	void SetSceneManager(SceneManager* sc);
 	void SetButtonsData();

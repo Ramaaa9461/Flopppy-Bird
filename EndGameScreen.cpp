@@ -12,6 +12,8 @@ EndGameScreen::EndGameScreen()
 	quit = new Button();
 
 	player1Win = false;
+	player2Win = false;
+	tie = false;
 }
 
 EndGameScreen::~EndGameScreen()
@@ -65,9 +67,10 @@ void EndGameScreen::DrawEndGameScreen()
 
 	if (player1Win)
 		gameFinished->DrawButton(gameFinished->GetRectangle(), "PLAYER 1 WINS");
-	else
+	if(player2Win)
 		gameFinished->DrawButton(gameFinished->GetRectangle(), "PLAYER 2 WINS");
-
+	if(tie)
+		gameFinished->DrawButton(gameFinished->GetRectangle(), "TIE");
 
 	replay->DrawButton(replay->GetRectangle(), "PLAY AGAIN");
 	quit->DrawButton(quit->GetRectangle(), "QUIT");
@@ -106,9 +109,26 @@ void EndGameScreen::SetButtonsData()
 	quit->SetWidth(400);
 }
 
-void EndGameScreen::SetWinPlayer(bool player1)
+void EndGameScreen::SetWinPlayer1(bool player1Win)
 {
-	player1Win = player1;
+	this->player1Win = player1Win;
+}
+
+void EndGameScreen::SetWinPlayer2(bool player2Win)
+{
+	this->player2Win = player2Win;
+}
+
+void EndGameScreen::SetTie(bool tie)
+{
+	this->tie = tie;
+}
+
+void EndGameScreen::ResetWinners()
+{
+	player1Win = false;
+	player2Win = false;
+	tie = false;
 }
 
 void EndGameScreen::SetSceneManager(SceneManager* sc)
