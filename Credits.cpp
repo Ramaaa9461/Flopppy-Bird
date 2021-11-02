@@ -29,6 +29,7 @@ void Credits::DrawCredits()
 
 	DrawText("Menu Music , mrpoly: https://opengameart.org/content/menu-music", 10, 350, fontSize - 10, RED);
 	DrawText("Chiptune Exploration , ansimuz: https://opengameart.org/content/chiptune-exploration", 10, 370, fontSize - 10, RED);
+	DrawText("8bit Menu Highlight , fupi: https://opengameart.org/content/8bit-menu-highlight", 10, 390, fontSize - 10, RED);
 
 	DrawText("V1.0", GetScreenWidth() - 50 , GetScreenHeight() - 25, 20, YELLOW);
 	DrawText("Press enter to continue...", 10, GetScreenHeight() - fontSize-10, fontSize+10, YELLOW);
